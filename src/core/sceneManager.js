@@ -3,11 +3,31 @@ import { renovationChains } from '../data/renovationData.js';
 import { addJournalEntry } from '../systems/journalSystem.js';
 import { runRealityCheck, startRenovation, satisfyTenant, publishListing, finalizeRent, runBankMeeting, finishChapter } from '../systems/worldSystem.js';
 
+const cinematicTimers = {
+  splashStarted: false,
+  prologueStarted: false,
+  pendingTimeouts: [],
+};
+
 export function renderApp(root, store) {
   const state = store.getState();
-  if (state.meta.phase === 'splash') return renderSplash(root, store);
-  if (state.meta.phase === 'prologue') return renderPrologue(root, store);
-  if (state.meta.phase === 'chapterEnd') return renderChapterEnd(root, state);
+
+  if (state.meta.phase === 'splash') {
+    renderSplash(root);
+    startSplashAutoplay(store);
+    return;
+  }
+
+  if (state.meta.phase === 'prologue') {
+    renderPrologue(root, state.meta.prologueIndex || 0);
+    startPrologueAutoplay(store);
+    return;
+  }
+
+  if (state.meta.phase === 'chapterEnd') {
+    renderChapterEnd(root, state);
+    return;
+  }
 
   root.className = 'snow';
   root.innerHTML = `
@@ -15,7 +35,7 @@ export function renderApp(root, store) {
       <div class="card"><span class="metric">Cash<strong>${fmt(state.finance.cash)} €</strong></span></div>
       <div class="card"><span class="metric">Cashflow / Monat<strong>${fmt(state.finance.cashflow)} €</strong></span></div>
       <div class="card"><span class="metric">Restdarlehen<strong>${fmt(state.finance.debt)} €</strong></span></div>
-      <div class="card"><span class="metric">Monat ${state.clock.month} (${state.clock.dayLabel})<strong>${Math.round(state.clock.monthProgress * 100)}% laufend</strong></span></div>
+      <div class="card"><span class="metric">Monat ${state.clock.month}<strong>${state.clock.dayLabel}</strong></span></div>
     </div>
     <div class="tabs">
       <button class="btn tab ${state.ui.tab === 'haus' ? 'primary' : ''}" data-tab="haus">Haus</button>
@@ -29,54 +49,78 @@ export function renderApp(root, store) {
   wireActions(root, store, state);
 }
 
-function renderSplash(root, store) {
-  root.className = '';
-  root.innerHTML = `<div class="brand"><div><h1>SICH STUDIOS</h1><button class="btn primary" id="start">Spiel starten</button></div></div>`;
-  root.querySelector('#start').onclick = () => {
+function clearCinematicTimers() {
+  cinematicTimers.pendingTimeouts.forEach((id) => clearTimeout(id));
+  cinematicTimers.pendingTimeouts = [];
+}
+
+function startSplashAutoplay(store) {
+  if (cinematicTimers.splashStarted) return;
+  clearCinematicTimers();
+  cinematicTimers.splashStarted = true;
+  cinematicTimers.prologueStarted = false;
+
+  const splashTimer = setTimeout(() => {
     store.setState((s) => {
-      s.meta.phase = s.meta.prologueSeen ? 'game' : 'prologue';
+      s.meta.phase = 'prologue';
+      s.meta.prologueIndex = 0;
       s.meta.started = true;
     });
-  };
+  }, 5000);
+  cinematicTimers.pendingTimeouts.push(splashTimer);
 }
 
-function renderPrologue(root, store) {
-  const state = store.getState();
-  const idx = state.meta.prologueIndex || 0;
-  const panel = prologuePanels[idx];
-  root.className = '';
+function startPrologueAutoplay(store) {
+  if (cinematicTimers.prologueStarted) return;
+  clearCinematicTimers();
+  cinematicTimers.prologueStarted = true;
+
+  const panelDuration = 5000;
+  const totalDuration = panelDuration * prologuePanels.length;
+
+  for (let i = 1; i < prologuePanels.length; i += 1) {
+    const t = setTimeout(() => {
+      store.setState((s) => { s.meta.prologueIndex = i; });
+    }, panelDuration * i);
+    cinematicTimers.pendingTimeouts.push(t);
+  }
+
+  const endTimer = setTimeout(() => {
+    addJournalEntry(store, 'Prolog', 'Die Nachricht vom Tod des Vaters und der Brief mit 30.000 €, Haus und 150.000 € Schulden.');
+    store.setState((s) => {
+      s.meta.phase = 'game';
+      s.meta.prologueSeen = true;
+      s.meta.prologueIndex = 0;
+    });
+    cinematicTimers.splashStarted = false;
+    cinematicTimers.prologueStarted = false;
+    clearCinematicTimers();
+  }, totalDuration + 1200);
+
+  cinematicTimers.pendingTimeouts.push(endTimer);
+}
+
+function renderSplash(root) {
+  root.className = 'splash-atmo';
   root.innerHTML = `
-    <div class="overlay">
-      <div class="scene fade-in">
-        <div class="scene-bg" style="background:${panel.bg}"></div>
-        <div class="scene-content">
-          <small>Prolog ${idx + 1}/${prologuePanels.length}</small>
-          <h2>${panel.title}</h2>
-          <p style="white-space:pre-line">${panel.text}</p>
-          <div class="footer-actions">
-            <button class="btn" id="skip">Überspringen</button>
-            <button class="btn primary" id="next">${idx === prologuePanels.length - 1 ? 'Kapitel 1 beginnen' : 'Weiter'}</button>
-          </div>
-        </div>
-      </div>
-    </div>`;
-
-  root.querySelector('#skip').onclick = () => endPrologue(store);
-  root.querySelector('#next').onclick = () => {
-    if (idx < prologuePanels.length - 1) {
-      store.setState((s) => { s.meta.prologueIndex = idx + 1; });
-    } else {
-      endPrologue(store);
-    }
-  };
+    <section class="intro-cinematic">
+      <div class="intro-grain"></div>
+      <h1>SICH STUDIOS</h1>
+    </section>
+  `;
 }
 
-function endPrologue(store) {
-  addJournalEntry(store, 'Prolog', 'Die Nachricht vom Tod des Vaters und der Brief mit 30.000 €, Haus und 150.000 € Schulden.');
-  store.setState((s) => {
-    s.meta.phase = 'game';
-    s.meta.prologueSeen = true;
-  });
+function renderPrologue(root, idx) {
+  const panel = prologuePanels[idx] ?? prologuePanels[0];
+  root.className = 'prologue-stage';
+  root.innerHTML = `
+    <section class="prologue-cinematic fade-cinematic">
+      <div class="prologue-bg" style="background:${panel.bg}"></div>
+      <div class="prologue-text">
+        <p style="white-space:pre-line">${panel.text}</p>
+      </div>
+    </section>
+  `;
 }
 
 function renderTab(state) {
