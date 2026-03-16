@@ -1,12 +1,25 @@
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1080 1920'>
-<defs><linearGradient id='bg' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#141b25'/><stop offset='1' stop-color='#090c11'/></linearGradient></defs>
+<defs>
+  <linearGradient id='bg' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#1f2936'/><stop offset='1' stop-color='#0c1118'/></linearGradient>
+  <radialGradient id='cold' cx='45%' cy='40%' r='42%'><stop offset='0' stop-color='#8da7be' stop-opacity='.2'/><stop offset='1' stop-color='#8da7be' stop-opacity='0'/></radialGradient>
+  <radialGradient id='phoneGlow' cx='50%' cy='50%' r='50%'><stop offset='0' stop-color='#9fb8cf' stop-opacity='.5'/><stop offset='1' stop-color='#9fb8cf' stop-opacity='0'/></radialGradient>
+</defs>
 <rect width='1080' height='1920' fill='url(#bg)'/>
-<rect x='70' y='280' width='940' height='1360' rx='44' fill='#1f2834' stroke='#3b495c' stroke-width='8'/>
-<rect x='140' y='390' width='800' height='980' rx='30' fill='#0f141c'/>
-<circle cx='540' cy='920' r='220' fill='#1a2532'/>
-<path d='M470 860 q70 -90 140 0 q-20 40 -10 80 q-20 20 -40 25 q-15 35 -35 35 q-20 0 -35 -35 q-20 -5 -40 -25 q10 -40 -10 -80z' fill='#9fb2c8'/>
-<rect x='250' y='540' width='580' height='24' rx='12' fill='#2f3f52'/>
-<rect x='300' y='590' width='480' height='18' rx='9' fill='#2a3646'/>
-<rect x='350' y='635' width='380' height='18' rx='9' fill='#2a3646'/>
-<circle cx='860' cy='420' r='14' fill='#9a4a4a'/>
+<rect x='0' y='1200' width='1080' height='720' fill='#12161c'/>
+<rect x='120' y='190' width='840' height='640' rx='18' fill='#1c2732' stroke='#6e5f4f' stroke-width='12'/>
+<rect x='148' y='218' width='784' height='585' fill='#31404f'/>
+<path d='M148 670 q180 -85 360 -30 q220 64 424 -58 v221h-784z' fill='#cbd6df' opacity='.1'/>
+<rect x='170' y='920' width='740' height='620' rx='28' fill='#222a35'/>
+<rect x='230' y='1010' width='620' height='500' rx='18' fill='#111722'/>
+<rect x='250' y='1035' width='580' height='220' rx='12' fill='#1f2d3c'/>
+<ellipse cx='540' cy='1180' rx='168' ry='168' fill='url(#phoneGlow)'/>
+<rect x='410' y='1070' width='260' height='470' rx='34' fill='#263749' stroke='#4a5f74' stroke-width='6'/>
+<rect x='438' y='1120' width='204' height='310' rx='18' fill='#0b121a'/>
+<rect x='458' y='1450' width='164' height='28' rx='14' fill='#202d3b'/>
+<circle cx='540' cy='1096' r='8' fill='#6f8397'/>
+<path d='M518 1260 q22 -38 44 0 q-6 27 -2 46 q-18 17 -20 25 q-2 -8 -20 -25 q4 -19 -2 -46z' fill='#b8c8d8'/>
+<rect x='270' y='1290' width='240' height='18' rx='9' fill='#2e3e52'/><rect x='270' y='1330' width='210' height='18' rx='9' fill='#2a3849'/>
+<circle cx='850' cy='1040' r='14' fill='#a45555'/>
+<ellipse cx='510' cy='760' rx='560' ry='380' fill='url(#cold)'/>
+<rect x='0' y='0' width='1080' height='1920' fill='#000' opacity='.24'/>
 </svg>

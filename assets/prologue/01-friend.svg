@@ -1,12 +1,29 @@
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1080 1920'>
-<defs><linearGradient id='bg' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#1a2433'/><stop offset='1' stop-color='#0c1017'/></linearGradient></defs>
-<rect width='1080' height='1920' fill='url(#bg)'/>
-<rect x='120' y='220' width='840' height='1300' rx='18' fill='#221b16'/>
-<rect x='170' y='310' width='740' height='420' fill='#b68d55'/>
-<rect x='200' y='340' width='680' height='360' fill='#8fb0c9'/>
-<circle cx='780' cy='500' r='16' fill='#e8eef4'/>
-<rect x='190' y='890' width='700' height='80' rx='12' fill='#312720'/>
-<rect x='190' y='990' width='420' height='220' rx='16' fill='#2a2f39'/>
-<rect x='650' y='1020' width='230' height='300' rx='16' fill='#353b47'/>
-<circle cx='250' cy='420' r='2' fill='#fff'/><circle cx='290' cy='460' r='2' fill='#fff'/><circle cx='510' cy='530' r='2' fill='#fff'/>
+<defs>
+  <linearGradient id='wall' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#2d3745'/><stop offset='1' stop-color='#111821'/></linearGradient>
+  <linearGradient id='floor' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#2f2926'/><stop offset='1' stop-color='#161617'/></linearGradient>
+  <linearGradient id='window' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#748ea4'/><stop offset='1' stop-color='#1b2b3d'/></linearGradient>
+  <radialGradient id='lampGlow' cx='55%' cy='26%' r='30%'><stop offset='0' stop-color='#ffd9a0' stop-opacity='.65'/><stop offset='1' stop-color='#ffd9a0' stop-opacity='0'/></radialGradient>
+  <filter id='blur' x='-30%' y='-30%' width='160%' height='160%'><feGaussianBlur stdDeviation='12'/></filter>
+</defs>
+<rect width='1080' height='1920' fill='url(#wall)'/>
+<rect y='1160' width='1080' height='760' fill='url(#floor)'/>
+<rect x='132' y='250' width='816' height='620' rx='10' fill='#1d2530' stroke='#6a553f' stroke-width='18'/>
+<rect x='165' y='285' width='750' height='550' fill='url(#window)'/>
+<path d='M165 690 q180 -130 390 -70 q150 35 360 -55 v200 h-750z' fill='#c8d4de' opacity='.12'/>
+<g fill='#eef5fb' opacity='.75'>
+  <circle cx='250' cy='365' r='3'/><circle cx='315' cy='430' r='2.7'/><circle cx='500' cy='390' r='3'/><circle cx='710' cy='470' r='3'/><circle cx='840' cy='370' r='2.4'/>
+</g>
+<rect x='210' y='920' width='640' height='320' rx='26' fill='#2c3138'/>
+<rect x='190' y='1090' width='700' height='90' rx='45' fill='#1f232a'/>
+<rect x='730' y='900' width='130' height='260' rx='12' fill='#4a3f35'/>
+<ellipse cx='795' cy='875' rx='86' ry='34' fill='#d2a96a'/>
+<rect x='520' y='1025' width='145' height='110' rx='8' fill='#161a20'/>
+<rect x='290' y='1225' width='470' height='130' rx='18' fill='#3a3029'/>
+<rect x='120' y='1360' width='840' height='260' fill='#2a2420'/>
+<ellipse cx='595' cy='510' rx='470' ry='320' fill='url(#lampGlow)'/>
+<ellipse cx='550' cy='430' rx='130' ry='46' fill='#f2d09d'/>
+<ellipse cx='550' cy='445' rx='85' ry='18' fill='#b18856'/>
+<rect x='0' y='0' width='1080' height='1920' fill='#000' opacity='.2'/>
+<ellipse cx='450' cy='1330' rx='360' ry='70' fill='#fff' opacity='.05' filter='url(#blur)'/>
 </svg>
