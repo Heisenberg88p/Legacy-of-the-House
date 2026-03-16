@@ -1,0 +1,13 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1080 1920'>
+<defs><linearGradient id='sky' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#3c4958'/><stop offset='1' stop-color='#1a232f'/></linearGradient></defs>
+<rect width='1080' height='1920' fill='url(#sky)'/>
+<rect y='1450' width='1080' height='470' fill='#c5ced6'/>
+<rect x='180' y='760' width='720' height='760' fill='#3b4048'/>
+<polygon points='140,800 540,520 940,800' fill='#2c3138'/>
+<rect x='300' y='980' width='170' height='170' fill='#697588'/>
+<rect x='610' y='980' width='170' height='170' fill='#697588'/>
+<rect x='480' y='1180' width='120' height='340' fill='#2a2a2d'/>
+<rect x='495' y='1210' width='90' height='90' fill='#8f6d44'/>
+<rect x='140' y='1460' width='800' height='60' fill='#8c949d'/>
+<circle cx='230' cy='560' r='70' fill='#d9e1ea' opacity='0.25'/>
+</svg>

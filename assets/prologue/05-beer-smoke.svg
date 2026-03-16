@@ -1,0 +1,12 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1080 1920'>
+<defs><linearGradient id='bg' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#2c2a2c'/><stop offset='1' stop-color='#121317'/></linearGradient></defs>
+<rect width='1080' height='1920' fill='url(#bg)'/>
+<rect x='120' y='930' width='840' height='640' fill='#1e2229'/>
+<rect x='170' y='1020' width='740' height='460' fill='#292c33'/>
+<ellipse cx='500' cy='1280' rx='180' ry='260' fill='#14181f'/>
+<rect x='575' y='1290' width='90' height='180' rx='20' fill='#1a1d24'/>
+<rect x='660' y='1310' width='50' height='20' fill='#ddd'/>
+<rect x='380' y='1340' width='45' height='120' fill='#8e6a38'/>
+<rect x='375' y='1320' width='55' height='26' fill='#d2af6f'/>
+<path d='M690 1250 q20 -80 0 -160 q30 40 45 95 q10 35 8 65' stroke='#cbd1d7' stroke-width='8' fill='none' opacity='0.35'/>
+</svg>

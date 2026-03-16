@@ -1,0 +1,12 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1080 1920'>
+<defs><linearGradient id='bg' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#1a2433'/><stop offset='1' stop-color='#0c1017'/></linearGradient></defs>
+<rect width='1080' height='1920' fill='url(#bg)'/>
+<rect x='120' y='220' width='840' height='1300' rx='18' fill='#221b16'/>
+<rect x='170' y='310' width='740' height='420' fill='#b68d55'/>
+<rect x='200' y='340' width='680' height='360' fill='#8fb0c9'/>
+<circle cx='780' cy='500' r='16' fill='#e8eef4'/>
+<rect x='190' y='890' width='700' height='80' rx='12' fill='#312720'/>
+<rect x='190' y='990' width='420' height='220' rx='16' fill='#2a2f39'/>
+<rect x='650' y='1020' width='230' height='300' rx='16' fill='#353b47'/>
+<circle cx='250' cy='420' r='2' fill='#fff'/><circle cx='290' cy='460' r='2' fill='#fff'/><circle cx='510' cy='530' r='2' fill='#fff'/>
+</svg>
