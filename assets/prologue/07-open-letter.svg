@@ -1,0 +1,16 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1080 1920'>
+<defs><linearGradient id='bg' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#3a3430'/><stop offset='1' stop-color='#131318'/></linearGradient></defs>
+<rect width='1080' height='1920' fill='url(#bg)'/>
+<rect x='110' y='380' width='860' height='1160' rx='24' fill='#e5dbc9'/>
+<g stroke='#988d7e' stroke-width='8'>
+<line x1='220' y1='610' x2='860' y2='610'/>
+<line x1='220' y1='700' x2='860' y2='700'/>
+<line x1='220' y1='790' x2='860' y2='790'/>
+<line x1='220' y1='880' x2='760' y2='880'/>
+<line x1='220' y1='1060' x2='860' y2='1060'/>
+<line x1='220' y1='1150' x2='820' y2='1150'/>
+<line x1='220' y1='1240' x2='790' y2='1240'/>
+</g>
+<circle cx='840' cy='1460' r='72' fill='#6b1f1f'/>
+<rect x='0' y='0' width='1080' height='1920' fill='#000' opacity='0.18'/>
+</svg>

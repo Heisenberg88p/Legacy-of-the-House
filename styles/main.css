@@ -10,6 +10,16 @@
   --ok: #80a287;
 }
 * { box-sizing: border-box; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+html.cinematic-lock,
+body.cinematic-lock {
+  overflow: hidden;
+}
+
 body {
   margin: 0;
   font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
@@ -46,6 +56,7 @@ body {
   min-height: 100dvh;
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
 .intro-cinematic {
   position: relative;
@@ -93,11 +104,21 @@ body {
   overflow: hidden;
   background: #07090d;
 }
+.prologue-cinematic::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at center, #00000000 35%, #00000080 100%);
+}
 .prologue-bg {
   position: absolute;
   inset: 0;
   transform: scale(1.03);
-  filter: saturate(0.7) brightness(0.72);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: saturate(0.72) brightness(0.68);
   animation: cinematicDrift 5s ease-out forwards;
 }
 @keyframes cinematicDrift {
@@ -113,6 +134,7 @@ body {
   background: linear-gradient(180deg, #00000000 0%, #070a10d9 40%, #070a10f0 100%);
 }
 .prologue-text p {
+  max-width: 90%;
   font-size: 1.03rem;
   line-height: 1.52;
   color: #e7edf4;

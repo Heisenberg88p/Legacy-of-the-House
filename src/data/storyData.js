@@ -4,37 +4,37 @@ export const MONTH_NAMES = ['Januar','Februar','März','April','Mai','Juni','Jul
 export const prologuePanels = [
   {
     id: 'friend-night',
-    bg: 'linear-gradient(135deg,#4a3f34 0%, #1a2230 50%, #10151d 100%)',
+    image: 'assets/prologue/01-friend.svg',
     text: 'Bei einem Freund war die Wohnung warm, das Licht weich. Draußen trieb Schnee am Fenster vorbei, drinnen war für einen Moment alles still.',
   },
   {
     id: 'phone-call',
-    bg: 'linear-gradient(130deg,#1f2733 0%, #11151c 65%, #0a0d12 100%)',
+    image: 'assets/prologue/02-call.svg',
     text: 'Dann klingelte das Telefon. Die Stimme am anderen Ende war ruhig, zu ruhig: Sein Vater sei tot. Ein Suizid.',
   },
   {
     id: 'paper-pressure',
-    bg: 'linear-gradient(125deg,#2d3138 0%, #1b2028 55%, #12161d 100%)',
+    image: 'assets/prologue/03-paperwork.svg',
     text: 'Die Tage danach wurden zu Formularen, Fristen und Aktenordnern. Jeder Stempel fühlte sich schwerer an als der vorherige.',
   },
   {
     id: 'house-outside',
-    bg: 'linear-gradient(130deg,#354150 0%, #1f2630 52%, #141920 100%)',
+    image: 'assets/prologue/04-house.svg',
     text: 'Am Abend stand er vor dem alten Haus. Der Putz blätterte, die Fenster waren blind, und über dem Dach hing ein bleigrauer Winterhimmel.',
   },
   {
     id: 'house-inside',
-    bg: 'linear-gradient(135deg,#3b2f29 0%, #1f2127 45%, #12151b 100%)',
+    image: 'assets/prologue/05-beer-smoke.svg',
     text: 'Im Erdgeschoss setzte er sich in die Kälte. Ein Bier in der Hand, Rauch im Raum, und zum ersten Mal begriff er, dass niemand mehr antworten würde.',
   },
   {
     id: 'sealed-letter',
-    bg: 'linear-gradient(130deg,#3f3129 0%, #241f22 45%, #121217 100%)',
+    image: 'assets/prologue/06-sealed-letter.svg',
     text: 'Auf dem bröckeligen Kamin lag ein schwerer Umschlag. Dickes Papier. Dunkles Siegel. Sorgfältig abgelegt, als hätte jemand auf genau diesen Abend gewartet.',
   },
   {
     id: 'letter-opened',
-    bg: 'linear-gradient(125deg,#4a3a2f 0%, #251f23 45%, #111117 100%)',
+    image: 'assets/prologue/07-open-letter.svg',
     text: '„Es tut mir leid. Ich wollte nur das Beste für dich.\n\nIch habe das Versprechen an deine Mutter nicht halten können. Seit ihrem Tod vor sieben Jahren habe ich nur gearbeitet, war nie da, und am Ende habe ich alles verloren.\n\nIch hinterlasse dir 30.000 € Bargeld, dieses alte Haus und 150.000 € Restschuld.\nWenn du noch etwas von mir tragen willst, dann mach aus diesem Ende einen Anfang.“',
   },
 ];

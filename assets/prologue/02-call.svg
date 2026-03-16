@@ -1,0 +1,12 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1080 1920'>
+<defs><linearGradient id='bg' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#141b25'/><stop offset='1' stop-color='#090c11'/></linearGradient></defs>
+<rect width='1080' height='1920' fill='url(#bg)'/>
+<rect x='70' y='280' width='940' height='1360' rx='44' fill='#1f2834' stroke='#3b495c' stroke-width='8'/>
+<rect x='140' y='390' width='800' height='980' rx='30' fill='#0f141c'/>
+<circle cx='540' cy='920' r='220' fill='#1a2532'/>
+<path d='M470 860 q70 -90 140 0 q-20 40 -10 80 q-20 20 -40 25 q-15 35 -35 35 q-20 0 -35 -35 q-20 -5 -40 -25 q10 -40 -10 -80z' fill='#9fb2c8'/>
+<rect x='250' y='540' width='580' height='24' rx='12' fill='#2f3f52'/>
+<rect x='300' y='590' width='480' height='18' rx='9' fill='#2a3646'/>
+<rect x='350' y='635' width='380' height='18' rx='9' fill='#2a3646'/>
+<circle cx='860' cy='420' r='14' fill='#9a4a4a'/>
+</svg>

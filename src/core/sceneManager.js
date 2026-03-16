@@ -9,20 +9,29 @@ const cinematicTimers = {
   pendingTimeouts: [],
 };
 
+function setCinematicViewportLock(enabled) {
+  document.documentElement.classList.toggle('cinematic-lock', enabled);
+  document.body.classList.toggle('cinematic-lock', enabled);
+}
+
 export function renderApp(root, store) {
   const state = store.getState();
 
   if (state.meta.phase === 'splash') {
+    setCinematicViewportLock(true);
     renderSplash(root);
     startSplashAutoplay(store);
     return;
   }
 
   if (state.meta.phase === 'prologue') {
+    setCinematicViewportLock(true);
     renderPrologue(root, state.meta.prologueIndex || 0);
     startPrologueAutoplay(store);
     return;
   }
+
+  setCinematicViewportLock(false);
 
   if (state.meta.phase === 'chapterEnd') {
     renderChapterEnd(root, state);
@@ -115,7 +124,7 @@ function renderPrologue(root, idx) {
   root.className = 'prologue-stage';
   root.innerHTML = `
     <section class="prologue-cinematic fade-cinematic">
-      <div class="prologue-bg" style="background:${panel.bg}"></div>
+      <div class="prologue-bg" style="background-image:url('${panel.image}')"></div>
       <div class="prologue-text">
         <p style="white-space:pre-line">${panel.text}</p>
       </div>
