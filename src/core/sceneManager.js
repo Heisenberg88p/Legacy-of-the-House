@@ -38,20 +38,33 @@ export function renderApp(root, store) {
     return;
   }
 
-  root.className = 'snow';
+  root.className = 'snow game-hub';
   root.innerHTML = `
-    <div class="topbar fade-in">
-      <div class="card"><span class="metric">Cash<strong>${fmt(state.finance.cash)} €</strong></span></div>
-      <div class="card"><span class="metric">Cashflow / Monat<strong>${fmt(state.finance.cashflow)} €</strong></span></div>
-      <div class="card"><span class="metric">Restdarlehen<strong>${fmt(state.finance.debt)} €</strong></span></div>
-      <div class="card"><span class="metric">Monat ${state.clock.month}<strong>${state.clock.dayLabel}</strong></span></div>
-    </div>
-    <div class="tabs">
-      <button class="btn tab ${state.ui.tab === 'haus' ? 'primary' : ''}" data-tab="haus">Haus</button>
-      <button class="btn tab ${state.ui.tab === 'journal' ? 'primary' : ''}" data-tab="journal">Journal</button>
-      <button class="btn tab ${state.ui.tab === 'story' ? 'primary' : ''}" data-tab="story">Story</button>
-    </div>
-    ${renderTab(state)}
+    <main class="hub-shell fade-in">
+      <section class="hub-stage">
+        <div class="hub-sky"></div>
+        <div class="hub-house" aria-label="Haus-Hub">
+          ${renderHouseZones(state)}
+        </div>
+        <div class="hub-statusline" aria-label="Kapitelstatus">
+          <span>Cash <strong>${fmt(state.finance.cash)} €</strong></span>
+          <span>Cashflow <strong>${fmt(state.finance.cashflow)} € / Monat</strong></span>
+          <span>Darlehen <strong>${fmt(state.finance.debt)} €</strong></span>
+          <span>Monat <strong>${state.clock.month}</strong> · ${state.clock.dayLabel}</span>
+        </div>
+      </section>
+
+      <nav class="hub-nav" aria-label="Hauptbereiche">
+        <button class="btn tab ${state.ui.tab === 'haus' ? 'primary' : ''}" data-tab="haus">Haus / Räume</button>
+        <button class="btn tab ${state.ui.tab === 'journal' ? 'primary' : ''}" data-tab="journal">Journal</button>
+        <button class="btn tab ${state.ui.tab === 'finanzen' ? 'primary' : ''}" data-tab="finanzen">Finanzen</button>
+        <button class="btn tab ${state.ui.tab === 'story' ? 'primary' : ''}" data-tab="story">Ereignisse</button>
+      </nav>
+
+      <section class="hub-panel">
+        ${renderTab(state)}
+      </section>
+    </main>
   `;
 
   root.querySelectorAll('[data-tab]').forEach((b) => b.onclick = () => store.setState((s) => { s.ui.tab = b.dataset.tab; }));
@@ -136,29 +149,49 @@ function renderTab(state) {
   if (state.ui.tab === 'journal') {
     return `<div class="card list">${state.journal.length ? state.journal.map((j) => `<div class="row"><small>${j.tag} · Monat ${j.month}</small><h3>${j.title}</h3><p>${j.text}</p></div>`).join('') : '<p class="muted">Noch keine Einträge.</p>'}</div>`;
   }
+  if (state.ui.tab === 'finanzen') return renderFinanceTab(state);
   if (state.ui.tab === 'story') return renderStoryTab(state);
   return renderHouseTab(state);
 }
 
-function renderHouseTab(state) {
+function renderHouseZones(state) {
   const r = state.rooms;
   return `
-    <div class="card fade-in">
-      <h2>Hausansicht</h2>
-      <p class="note">Ein ruhiger Winterabend. Raum für Raum zurück ins Leben.</p>
-      <div class="house-grid">
-        ${roomCard('schlafzimmer', r.schlafzimmer)}
-        ${roomCard('wohnzimmer', r.wohnzimmer)}
-        ${roomCard('buero', r.buero)}
-        ${roomCard('kinderzimmer', r.kinderzimmer)}
-        ${roomCard('garage', r.garage)}
-        ${roomCard('garten', r.garten)}
+    <button class="room-zone zone-schlafzimmer ${r.schlafzimmer.unlocked ? '' : 'locked'}" data-room="schlafzimmer" ${r.schlafzimmer.unlocked ? '' : 'disabled'}>
+      <strong>Schlafzimmer</strong><small>${roomHint(r.schlafzimmer)}</small>
+    </button>
+    <button class="room-zone zone-wohnzimmer ${r.wohnzimmer.unlocked ? '' : 'locked'}" data-room="wohnzimmer" ${r.wohnzimmer.unlocked ? '' : 'disabled'}>
+      <strong>Wohnzimmer</strong><small>${roomHint(r.wohnzimmer)}</small>
+    </button>
+    <button class="room-zone zone-buero ${r.buero.unlocked ? '' : 'locked'}" data-room="buero" ${r.buero.unlocked ? '' : 'disabled'}>
+      <strong>Büro</strong><small>${roomHint(r.buero)}</small>
+    </button>
+    <button class="room-zone zone-kinderzimmer ${r.kinderzimmer.unlocked ? '' : 'locked'}" data-room="kinderzimmer" ${r.kinderzimmer.unlocked ? '' : 'disabled'}>
+      <strong>Kinderzimmer</strong><small>${roomHint(r.kinderzimmer)}</small>
+    </button>
+    <button class="room-zone zone-garage locked" data-room="garage" disabled>
+      <strong>Garage</strong><small>gesperrt</small>
+    </button>
+    <button class="room-zone zone-garten locked" data-room="garten" disabled>
+      <strong>Garten</strong><small>gesperrt</small>
+    </button>
+  `;
+}
+
+function renderHouseTab(state) {
+  const selected = state.rooms[state.ui.selectedRoom] || state.rooms.schlafzimmer;
+  return `
+    <article class="card fade-in hub-card">
+      <small class="muted">Haus / Räume</small>
+      <h2>Das Haus als Mittelpunkt</h2>
+      <p class="note">Wähle einen Bereich direkt in der Hausbühne oben. Die aktive Auswahl wird hier vertieft.</p>
+      <div class="room-strip">
+        <div class="room-chip">Aktiv: <strong>${selected.label}</strong></div>
+        <div class="room-chip">Fortschritt: <strong>${selected.done.length}</strong> Maßnahmen</div>
+        <div class="room-chip">Status: <strong>${selected.inWork ? selected.inWork.status : 'ruhig'}</strong></div>
       </div>
-    </div>
-    <div class="card" style="margin-top:10px;">
-      <h3>${state.rooms[state.ui.selectedRoom]?.label || 'Raum'}</h3>
       ${renderRoomActions(state)}
-    </div>`;
+    </article>`;
 }
 
 function renderRoomActions(state) {
@@ -175,15 +208,37 @@ function renderRoomActions(state) {
   `;
 }
 
-function roomCard(key, room) {
-  const lockClass = room.unlocked ? '' : 'locked';
-  const hint = room.unlocked ? (room.inWork ? room.inWork.status : `Abgeschlossen: ${room.done?.length || 0}`) : 'gesperrt';
-  return `<button class="room ${lockClass}" data-room="${key}" ${room.unlocked ? '' : 'disabled'}><strong>${room.label}</strong><small>${hint}</small></button>`;
+function roomHint(room) {
+  if (!room.unlocked) return 'gesperrt';
+  if (room.inWork) return room.inWork.status;
+  return `Abgeschlossen: ${room.done?.length || 0}`;
+}
+
+function renderFinanceTab(state) {
+  return `
+    <div class="card list fade-in hub-card">
+      <div class="row">
+        <h3>Finanzlage</h3>
+        <p>Cash: <strong>${fmt(state.finance.cash)} €</strong></p>
+        <p>Cashflow / Monat: <strong>${fmt(state.finance.cashflow)} €</strong></p>
+        <p>Restdarlehen: <strong>${fmt(state.finance.debt)} €</strong></p>
+        <p>Rufwert: <strong>${state.finance.reputation}</strong></p>
+      </div>
+      <div class="row">
+        <h3>Monatlicher Druck</h3>
+        <p>Der Monatslauf bleibt ruhig, aber jede Entscheidung wirkt auf Liquidität und Fortschritt.</p>
+        <p class="note">Nächster Meilenstein: 10% Liquidität für den Banktermin (${fmt(state.finance.debt * 0.1)} €).</p>
+      </div>
+    </div>`;
 }
 
 function renderStoryTab(state) {
   return `
-    <div class="card list fade-in">
+    <div class="card list fade-in hub-card">
+      <div class="row">
+        <h3>Ereignisse / Story</h3>
+        <p class="note">Anstehende Entscheidungen, Trigger und Kapitelmomente.</p>
+      </div>
       <div class="row">
         <h3>Wirtschaftlicher Reality-Check</h3>
         <p>Negativer Start-Cashflow zwingt zur Renovierung + Vermietung des Erdgeschosses.</p>

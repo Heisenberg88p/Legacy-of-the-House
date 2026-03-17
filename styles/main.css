@@ -28,10 +28,10 @@ body {
   min-height: 100dvh;
 }
 #app {
-  max-width: 430px;
+  max-width: 1100px;
   min-height: 100dvh;
   margin: 0 auto;
-  padding: 16px 14px 24px;
+  padding: 14px 12px 20px;
   position: relative;
   overflow: hidden;
 }
@@ -163,6 +163,164 @@ body {
 }
 .fade-cinematic { animation: cinematicFade 0.9s ease; }
 @keyframes cinematicFade { from { opacity: 0; } to { opacity: 1; } }
+
+/* Kapitel-1-Hub: Ort zuerst, UI zweitens, Zahlen drittens. */
+.game-hub {
+  display: block;
+}
+.hub-shell {
+  display: grid;
+  gap: 12px;
+}
+.hub-stage {
+  position: relative;
+  min-height: clamp(340px, 56dvh, 520px);
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid #ffffff1a;
+  background: linear-gradient(180deg, #141b25 0%, #0e131c 52%, #0b0f16 100%);
+  box-shadow: 0 20px 50px #00000066;
+}
+.hub-sky {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 72% 18%, #9fb3cc22 0%, transparent 28%),
+    linear-gradient(180deg, #273240 0%, #1a2433 38%, #111824 65%, #0b1119 100%);
+}
+.hub-house {
+  position: absolute;
+  left: 50%;
+  bottom: 18%;
+  width: min(96%, 760px);
+  height: min(68%, 340px);
+  transform: translateX(-50%);
+  border-radius: 10px;
+  background:
+    linear-gradient(180deg, #00000000 0%, #00000066 100%),
+    linear-gradient(180deg, #3d4654 0%, #2f3847 60%, #252d3a 100%);
+  border: 1px solid #ffffff1f;
+  box-shadow: 0 24px 34px #00000080;
+}
+.hub-house::before {
+  content: "";
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  top: -16%;
+  height: 24%;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  background: linear-gradient(180deg, #4a5668 0%, #2e394a 100%);
+  border: 1px solid #ffffff24;
+}
+.hub-house::after {
+  content: "";
+  position: absolute;
+  left: -2%;
+  right: -2%;
+  bottom: -9%;
+  height: 17%;
+  background: linear-gradient(180deg, #f2f6fb08 0%, #d7e4f110 28%, #0c111900 100%);
+  filter: blur(2px);
+}
+.hub-statusline {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  font-size: 0.79rem;
+  color: #b9c5d5;
+}
+.hub-statusline span {
+  padding: 7px 8px;
+  border-radius: 10px;
+  background: #0b1018bb;
+  border: 1px solid #ffffff18;
+}
+.hub-statusline strong { color: #eff5fb; }
+
+.room-zone {
+  position: absolute;
+  border: 1px solid #ffffff26;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #1b2431bf 0%, #0f151fbf 100%);
+  color: #eaf0f6;
+  padding: 8px 10px;
+  text-align: left;
+  display: grid;
+  gap: 2px;
+  min-width: 132px;
+  cursor: pointer;
+}
+.room-zone small { color: #9cb0c5; font-size: 0.74rem; }
+.room-zone.locked {
+  opacity: 0.46;
+  filter: grayscale(0.45);
+  cursor: not-allowed;
+}
+.room-zone:hover:not(:disabled) { border-color: #e3bf9466; }
+
+.zone-schlafzimmer { left: 7%; top: 20%; }
+.zone-wohnzimmer { left: 31%; top: 20%; }
+.zone-buero { right: 31%; top: 20%; }
+.zone-kinderzimmer { right: 7%; top: 20%; }
+.zone-garage { left: 20%; bottom: 13%; }
+.zone-garten { right: 20%; bottom: 13%; }
+
+.hub-nav {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+.hub-nav .tab {
+  border-radius: 12px;
+  background: #111827;
+  border-color: #ffffff20;
+  font-size: 0.82rem;
+  padding: 9px 8px;
+}
+.hub-nav .tab.primary {
+  background: linear-gradient(160deg, #425368, #2f3b4a);
+  border-color: #c9a67b5e;
+}
+
+.hub-panel { display: block; }
+.hub-card { background: linear-gradient(145deg, #171f2a, #141b25); }
+.room-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.room-chip {
+  background: #111a26;
+  border: 1px solid #ffffff1d;
+  border-radius: 10px;
+  padding: 8px;
+  font-size: 0.82rem;
+  color: #b9c8d8;
+}
+.room-chip strong { color: #eff4fa; }
+
+@media (max-width: 760px) {
+  #app { max-width: 460px; }
+  .hub-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .room-strip { grid-template-columns: 1fr; }
+  .hub-house { width: 95%; height: 62%; }
+  .room-zone { min-width: 122px; padding: 7px 8px; }
+  .zone-schlafzimmer, .zone-wohnzimmer, .zone-buero, .zone-kinderzimmer {
+    top: 16%;
+  }
+  .zone-schlafzimmer { left: 4%; }
+  .zone-wohnzimmer { left: 27%; }
+  .zone-buero { right: 27%; }
+  .zone-kinderzimmer { right: 4%; }
+  .zone-garage { left: 11%; bottom: 12%; }
+  .zone-garten { right: 11%; bottom: 12%; }
+}
 
 .card {
   background: linear-gradient(145deg, #1a222d, #18202a);
