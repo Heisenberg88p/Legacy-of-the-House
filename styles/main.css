@@ -334,6 +334,91 @@ body {
 }
 .room-chip strong { color: #eff4fa; }
 
+/* Desktop: Kapitel-1-Hub in eine Viewport-Höhe einpassen, ohne Seiten-Scroll. */
+@media (min-width: 900px) {
+  #app.game-hub {
+    height: 100dvh;
+    padding: 10px 12px;
+    overflow: hidden;
+  }
+
+  .hub-shell {
+    height: calc(100dvh - 20px);
+    grid-template-rows: minmax(0, 1fr) auto minmax(170px, 0.42fr);
+    gap: 8px;
+  }
+
+  .hub-stage {
+    min-height: 0;
+    height: 100%;
+  }
+
+  .hub-statusline {
+    font-size: 0.74rem;
+    gap: 5px;
+  }
+
+  .hub-statusline span {
+    padding: 7px 9px;
+  }
+
+  .hub-nav .tab {
+    padding: 7px 8px;
+    font-size: 0.78rem;
+  }
+
+  .hub-panel {
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .hub-panel .card {
+    height: 100%;
+    padding: 10px;
+  }
+
+  .hub-panel .list {
+    gap: 6px;
+  }
+
+  .hub-panel .row {
+    padding: 8px;
+  }
+
+  .hub-panel h2 {
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+  }
+
+  .hub-panel h3 {
+    font-size: 0.96rem;
+    margin-bottom: 4px;
+  }
+
+  .hub-panel p {
+    margin-bottom: 5px;
+    font-size: 0.87rem;
+    line-height: 1.35;
+  }
+
+  .room-strip {
+    margin-bottom: 8px;
+    gap: 6px;
+  }
+
+  .room-chip {
+    padding: 6px;
+    font-size: 0.76rem;
+  }
+
+  .hub-panel input,
+  .hub-panel textarea,
+  .hub-panel select {
+    padding: 6px;
+    font-size: 0.84rem;
+  }
+}
+
 @media (max-width: 760px) {
   #app { max-width: 460px; }
   .hub-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
