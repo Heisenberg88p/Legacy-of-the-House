@@ -128,6 +128,7 @@ function startSplashAutoplay(store) {
   const splashTimer = setTimeout(() => {
     store.setState((s) => {
       s.meta.phase = PHASES.PROLOGUE;
+      s.meta.phase = 'prologue';
       s.meta.prologueIndex = 0;
       s.meta.started = true;
     });
@@ -154,6 +155,7 @@ function startPrologueAutoplay(store) {
     addJournalEntry(store, 'Prolog', 'Die Nachricht vom Tod des Vaters und der Brief mit 30.000 €, Haus und 150.000 € Schulden.');
     store.setState((s) => {
       s.meta.phase = PHASES.HOUSE_ARRIVAL;
+      s.meta.phase = 'game';
       s.meta.prologueSeen = true;
       s.meta.prologueIndex = 0;
     });
