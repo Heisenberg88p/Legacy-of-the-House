@@ -125,6 +125,21 @@ body {
   from { transform: scale(1.08) translateY(0.7%); }
   to { transform: scale(1.14) translateY(-0.9%); }
 }
+
+/* Desktop: Prolog etwas weiter herausgezogen, damit weniger vom Motiv abgeschnitten wird. */
+@media (min-width: 900px) {
+  .prologue-bg {
+    transform: scale(1.01);
+    background-position: 50% 44%;
+    animation: cinematicDriftDesktop 5s ease-out forwards;
+  }
+
+  @keyframes cinematicDriftDesktop {
+    from { transform: scale(1.03) translateY(0.45%); }
+    to { transform: scale(1.07) translateY(-0.45%); }
+  }
+}
+
 .prologue-text {
   position: absolute;
   left: 0;
