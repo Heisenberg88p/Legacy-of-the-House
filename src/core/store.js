@@ -1,6 +1,13 @@
 // Zentraler, serialisierbarer Spielzustand.
 export const initialState = {
-  meta: { started: false, prologueSeen: false, prologueIndex: 0, chapter: 1, phase: 'splash' },
+  meta: {
+    started: false,
+    prologueSeen: false,
+    prologueIndex: 0,
+    chapter: 1,
+    phase: 'splash',
+    chapter1Phases: ['splash', 'prologue', 'house_arrival', 'house_explore', 'game'],
+  },
   clock: { month: 1, dayLabel: 'Januar', monthProgress: 0 },
   finance: {
     cash: 30000,

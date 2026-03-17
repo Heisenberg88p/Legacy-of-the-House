@@ -9,6 +9,34 @@ const cinematicTimers = {
   pendingTimeouts: [],
 };
 
+const PHASES = {
+  SPLASH: 'splash',
+  PROLOGUE: 'prologue',
+  HOUSE_ARRIVAL: 'house_arrival',
+  HOUSE_EXPLORE: 'house_explore',
+  GAME: 'game',
+  CHAPTER_END: 'chapterEnd',
+};
+
+const PHASE_ALIASES = {
+  'house-arrival': PHASES.HOUSE_ARRIVAL,
+  'house-explore': PHASES.HOUSE_EXPLORE,
+};
+
+function normalizePhase(phase) {
+  return PHASE_ALIASES[phase] || phase;
+}
+
+function transitionToNextPhase(store, phase) {
+  const transitions = {
+    [PHASES.HOUSE_ARRIVAL]: PHASES.HOUSE_EXPLORE,
+    [PHASES.HOUSE_EXPLORE]: PHASES.GAME,
+  };
+  const next = transitions[phase];
+  if (!next) return;
+  store.setState((s) => { s.meta.phase = next; });
+}
+
 function setCinematicViewportLock(enabled) {
   document.documentElement.classList.toggle('cinematic-lock', enabled);
   document.body.classList.toggle('cinematic-lock', enabled);
@@ -16,24 +44,37 @@ function setCinematicViewportLock(enabled) {
 
 export function renderApp(root, store) {
   const state = store.getState();
+  const phase = normalizePhase(state.meta.phase);
 
-  if (state.meta.phase === 'splash') {
+  if (phase !== state.meta.phase) {
+    store.setState((s) => { s.meta.phase = phase; });
+    return;
+  }
+
+  if (phase === PHASES.SPLASH) {
     setCinematicViewportLock(true);
     renderSplash(root);
     startSplashAutoplay(store);
     return;
   }
 
-  if (state.meta.phase === 'prologue') {
+  if (phase === PHASES.PROLOGUE) {
     setCinematicViewportLock(true);
     renderPrologue(root, state.meta.prologueIndex || 0);
     startPrologueAutoplay(store);
     return;
   }
 
+  if (phase === PHASES.HOUSE_ARRIVAL || phase === PHASES.HOUSE_EXPLORE) {
+    // Aktuell nur als sauberes Fundament vorbereitet.
+    // Spätere Visual-Szenen können hier eingehängt werden, ohne den Restfluss umzubauen.
+    transitionToNextPhase(store, phase);
+    return;
+  }
+
   setCinematicViewportLock(false);
 
-  if (state.meta.phase === 'chapterEnd') {
+  if (phase === PHASES.CHAPTER_END) {
     renderChapterEnd(root, state);
     return;
   }
@@ -86,6 +127,7 @@ function startSplashAutoplay(store) {
 
   const splashTimer = setTimeout(() => {
     store.setState((s) => {
+      s.meta.phase = PHASES.PROLOGUE;
       s.meta.phase = 'prologue';
       s.meta.prologueIndex = 0;
       s.meta.started = true;
@@ -112,6 +154,7 @@ function startPrologueAutoplay(store) {
   const endTimer = setTimeout(() => {
     addJournalEntry(store, 'Prolog', 'Die Nachricht vom Tod des Vaters und der Brief mit 30.000 €, Haus und 150.000 € Schulden.');
     store.setState((s) => {
+      s.meta.phase = PHASES.HOUSE_ARRIVAL;
       s.meta.phase = 'game';
       s.meta.prologueSeen = true;
       s.meta.prologueIndex = 0;
