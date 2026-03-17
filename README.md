@@ -12,7 +12,7 @@ Lokales Starten:
 - `src/core/store.js` – zentraler State-Store
 - `src/core/sceneManager.js` – Screen-/Scene-Rendering inkl. automatischer Intro-/Prolog-Regie
 - `src/data/storyData.js` – Prolog-Panels, Monologe, Storytexte
-- `assets/prologue/` – 7 eingebundene Szenenbilder (SVG) für den filmischen Prolog
+- `assets/prolog/` – 7 eingebundene Szenenbilder (PNG) für den filmischen Prolog
 - `src/data/renovationData.js` – Renovierungsketten
 - `src/systems/timeSystem.js` – Monats-Zeitmotor (75s) ohne sekündliche Voll-Re-Renders
 - `src/systems/worldSystem.js` – Wirtschaft, Mieter, Bank, Vermietung, Trigger
