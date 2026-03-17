@@ -1,0 +1,28 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1080 1920'>
+<defs>
+  <linearGradient id='room' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#2a323c'/><stop offset='1' stop-color='#12161d'/></linearGradient>
+  <linearGradient id='desk' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#3b332d'/><stop offset='1' stop-color='#1c1b1d'/></linearGradient>
+</defs>
+<rect width='1080' height='1920' fill='url(#room)'/>
+<rect y='980' width='1080' height='940' fill='url(#desk)'/>
+<rect x='80' y='230' width='920' height='320' rx='14' fill='#1a222c'/>
+<rect x='120' y='280' width='840' height='220' rx='8' fill='#2a3645'/>
+<rect x='120' y='800' width='840' height='140' fill='#2d2622'/>
+<g>
+  <rect x='90' y='860' width='320' height='470' transform='rotate(-9 250 1095)' fill='#d7d0c2'/>
+  <rect x='340' y='810' width='390' height='580' transform='rotate(5 535 1100)' fill='#e1d8c7'/>
+  <rect x='670' y='890' width='300' height='500' transform='rotate(-4 820 1140)' fill='#cec5b6'/>
+  <rect x='130' y='1220' width='250' height='280' transform='rotate(6 255 1360)' fill='#dad1c2'/>
+</g>
+<g stroke='#7b7368' stroke-width='7' opacity='.78'>
+  <line x1='180' y1='1005' x2='340' y2='1005'/><line x1='180' y1='1060' x2='370' y2='1060'/><line x1='390' y1='980' x2='640' y2='980'/><line x1='390' y1='1035' x2='690' y2='1035'/>
+  <line x1='715' y1='1030' x2='900' y2='1030'/><line x1='740' y1='1080' x2='890' y2='1080'/>
+</g>
+<rect x='150' y='690' width='170' height='90' rx='8' fill='#5f6f80'/>
+<rect x='332' y='690' width='170' height='90' rx='8' fill='#707f8f'/>
+<rect x='514' y='690' width='170' height='90' rx='8' fill='#576272'/>
+<rect x='696' y='690' width='170' height='90' rx='8' fill='#646f7f'/>
+<circle cx='850' cy='1260' r='58' fill='#8a3c3f'/><circle cx='850' cy='1260' r='34' fill='#b15c61' opacity='.7'/>
+<rect x='250' y='1450' width='560' height='120' rx='12' fill='#2a323f'/>
+<rect x='0' y='0' width='1080' height='1920' fill='#000' opacity='.24'/>
+</svg>
