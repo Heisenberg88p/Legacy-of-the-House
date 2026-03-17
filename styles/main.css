@@ -51,6 +51,7 @@ body {
 
 /* Intro: automatische 5s cinematic ohne UI-Controls. */
 .splash-atmo, .prologue-stage, .arrival-stage {
+.splash-atmo, .prologue-stage {
   max-width: none !important;
   width: 100%;
   min-height: 100dvh;
