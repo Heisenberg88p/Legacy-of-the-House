@@ -31,6 +31,13 @@ export function renderApp(root, store) {
     return;
   }
 
+  if (state.meta.phase === 'house-arrival') {
+    setCinematicViewportLock(true);
+    renderHouseArrival(root);
+    wireHouseArrival(root, store);
+    return;
+  }
+
   setCinematicViewportLock(false);
 
   if (state.meta.phase === 'chapterEnd') {
@@ -112,7 +119,7 @@ function startPrologueAutoplay(store) {
   const endTimer = setTimeout(() => {
     addJournalEntry(store, 'Prolog', 'Die Nachricht vom Tod des Vaters und der Brief mit 30.000 €, Haus und 150.000 € Schulden.');
     store.setState((s) => {
-      s.meta.phase = 'game';
+      s.meta.phase = 'house-arrival';
       s.meta.prologueSeen = true;
       s.meta.prologueIndex = 0;
     });
@@ -145,6 +152,33 @@ function renderPrologue(root, idx) {
       </div>
     </section>
   `;
+}
+
+function renderHouseArrival(root) {
+  root.className = 'arrival-stage';
+  root.innerHTML = `
+    <section class="house-arrival-cinematic fade-cinematic">
+      <div class="arrival-bg" style="background-image:url('assets/prolog/4_altes_haus.png')"></div>
+      <button class="arrival-door-hitbox" data-action="enter-house" aria-label="Haustür betreten"></button>
+      <div class="arrival-text">
+        <p>Der Kies knirschte unter seinen Schuhen.
+Das Haus wirkte größer als in seiner Erinnerung.
+Seit Jahren hatte er diesen Ort gemieden.</p>
+        <small>Tippe auf die Haustür</small>
+      </div>
+    </section>
+  `;
+}
+
+function wireHouseArrival(root, store) {
+  const door = root.querySelector('[data-action="enter-house"]');
+  if (!door) return;
+  door.onclick = () => {
+    root.querySelector('.house-arrival-cinematic')?.classList.add('fade-cinematic-out');
+    setTimeout(() => {
+      store.setState((s) => { s.meta.phase = 'game'; });
+    }, 700);
+  };
 }
 
 function renderTab(state) {
