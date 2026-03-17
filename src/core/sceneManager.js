@@ -43,9 +43,11 @@ export function renderApp(root, store) {
     <main class="hub-shell fade-in">
       <section class="hub-stage">
         <div class="hub-sky"></div>
+        <div class="hub-atmo hub-atmo-back"></div>
         <div class="hub-house" aria-label="Haus-Hub">
           ${renderHouseZones(state)}
         </div>
+        <div class="hub-atmo hub-atmo-front"></div>
         <div class="hub-statusline" aria-label="Kapitelstatus">
           <span>Cash <strong>${fmt(state.finance.cash)} €</strong></span>
           <span>Cashflow <strong>${fmt(state.finance.cashflow)} € / Monat</strong></span>
