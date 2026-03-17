@@ -50,7 +50,6 @@ body {
 @keyframes snow { to { transform: translateY(22%); } }
 
 /* Intro: automatische 5s cinematic ohne UI-Controls. */
-.splash-atmo, .prologue-stage, .arrival-stage {
 .splash-atmo, .prologue-stage {
   max-width: none !important;
   width: 100%;
@@ -164,90 +163,6 @@ body {
 }
 .fade-cinematic { animation: cinematicFade 0.9s ease; }
 @keyframes cinematicFade { from { opacity: 0; } to { opacity: 1; } }
-
-.fade-cinematic-out { animation: cinematicFadeOut 0.7s ease forwards; }
-@keyframes cinematicFadeOut { from { opacity: 1; } to { opacity: 0; } }
-
-/* Szene zwischen Prolog und Hub: Hausankunft. */
-.house-arrival-cinematic {
-  position: relative;
-  min-height: 100dvh;
-  overflow: hidden;
-  background: #07090d;
-}
-.house-arrival-cinematic::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(circle at 20% 16%, #c9d7e215 0%, transparent 34%),
-    linear-gradient(180deg, #05080d22 0%, #020305cc 100%);
-}
-.house-arrival-cinematic::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(circle at center, #00000000 34%, #00000095 100%);
-}
-.arrival-bg {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  filter: saturate(0.72) brightness(0.6);
-  transform: scale(1.04);
-  animation: arrivalDrift 7.2s ease-out forwards;
-}
-@keyframes arrivalDrift {
-  from { transform: scale(1.06) translateY(0.5%); }
-  to { transform: scale(1.11) translateY(-0.5%); }
-}
-.arrival-door-hitbox {
-  position: absolute;
-  left: 50%;
-  bottom: 26%;
-  width: min(21vw, 118px);
-  height: min(29vh, 160px);
-  transform: translateX(-50%);
-  background: #ffcc6608;
-  border: 1px solid #ffd49936;
-  border-radius: 12px;
-  box-shadow: 0 0 24px #ffb86b2f;
-  z-index: 2;
-}
-.arrival-door-hitbox:hover {
-  background: #ffcf7a16;
-}
-.arrival-text {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 20px 16px 26px;
-  z-index: 2;
-  background: linear-gradient(180deg, #00000000 0%, #060910d6 42%, #060910f3 100%);
-}
-.arrival-text p {
-  max-width: 90%;
-  margin: 0 0 8px;
-  white-space: pre-line;
-  font-size: 1.05rem;
-  line-height: 1.52;
-  color: #e6edf5;
-  text-shadow: 0 4px 16px #000;
-  opacity: 0;
-  animation: textAppear 1.5s ease 0.35s forwards;
-}
-.arrival-text small {
-  color: #adbdd0;
-  font-size: 0.83rem;
-  letter-spacing: 0.03em;
-  opacity: 0;
-  animation: textAppear 1.2s ease 1.1s forwards;
-}
 
 /* Kapitel-1-Hub: Ort zuerst, UI zweitens, Zahlen drittens. */
 .game-hub {
